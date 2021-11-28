@@ -1,0 +1,27 @@
+#-*-coding:utf-8-*-
+# python==3.7  python版本
+# 以下为稳定版，各操作系统均需安装
+Flask==1.1.2
+Flask-Cors==3.0.9
+Flask-JWT-Extended # JSON Web Token 跨域身份验证
+flask-mongoengine==0.9.5
+celery==5.0.0
+redis==3.5.3
+chardet==3.0.4 # 字符编码
+xlrd==1.2.0 # 读excel的
+python_docx==0.8.10 # 创建和编辑Microsoft Word
+pyspark==3.0.1
+torch==1.7.1
+tensorflow==2.1.0
+tensorflow-hub==0.9.0
+scikit_learn==0.23.2
+gensim==3.8.3 # 训练词向量
+pandas==1.1.3
+jieba==0.42.1
+matplotlib==3.3.2
+
+# 以下为预览版
+tfa-nightly # TensorFlow Addons
+
+# 以下仅windows需安装
+# eventlet==0.26.0 # 网络相关
