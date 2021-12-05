@@ -33,7 +33,8 @@
           <el-button type="success" plain size="mini" @click="handleParamsShow(row)">点击查看</el-button>
         </template>
       </el-table-column>
-      <el-table-column label="执行状态" column-key="preprocessStatus" :filters="statusFilter" class-name="status-col" width="120px">
+      <el-table-column label="执行状态" column-key="preprocessStatus" :filters="statusFilter" class-name="status-col"
+                       width="120px">
         <template slot-scope="{row}">
           <el-tag :type="row.preprocessStatus | statusFilter">
             {{ row.preprocessStatus }}
@@ -42,7 +43,7 @@
       </el-table-column>
       <el-table-column label="Spark支持" width="120px" align="center">
         <template slot-scope="{row}">
-          <el-switch v-model="row.sparkSupport" disabled />
+          <el-switch v-model="row.sparkSupport" disabled/>
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" min-width="300px" class-name="small-padding fixed-width">
@@ -75,7 +76,7 @@
       </el-table-column>
     </el-table>
     <el-row type="flex" justify="space-around" style="margin-top:50px">
-      <el-col :span="3" style="text-align:center" />
+      <el-col :span="3" style="text-align:center"/>
       <el-col :span="4" style="text-align:center">
         <el-button type="primary" @click="preprocessAdd.show=true">新增步骤</el-button>
       </el-col>
@@ -88,7 +89,7 @@
       <el-col :span="4" style="text-align:center">
         <el-button type="primary" @click="pipelineConstruction.show=true">管道生成</el-button>
       </el-col>
-      <el-col :span="5" style="text-align:center" />
+      <el-col :span="5" style="text-align:center"/>
     </el-row>
 
     <!-- 新增步骤对话框 -->
@@ -96,7 +97,8 @@
       <el-row type="flex" justify="center">
         <el-col :span="18" style="text-align:left">
           <el-form ref="preprocessAddForm" :model="preprocessAdd" label-width="100px">
-            <el-form-item label="选择步骤" prop="preprocessSelect" :rules="[{ required: true, message: '请选择新增的步骤', trigger: 'blur' }]">
+            <el-form-item label="选择步骤" prop="preprocessSelect"
+                          :rules="[{ required: true, message: '请选择新增的步骤', trigger: 'blur' }]">
               <el-cascader
                 v-model="preprocessAdd.preprocessSelect"
                 :options="preprocessAdd.preprocessList"
@@ -109,7 +111,8 @@
                 <span style="cursor:pointer">移至此处查看描述</span>
               </el-tooltip>
             </el-form-item>
-            <el-form-item label="承接步骤" prop="previousProcessID" :rules="[{ required: true, message: '请选择承接的步骤', trigger: 'blur' }]">
+            <el-form-item label="承接步骤" prop="previousProcessID"
+                          :rules="[{ required: true, message: '请选择承接的步骤', trigger: 'blur' }]">
               <el-select v-model="preprocessAdd.previousProcessID" placeholder="从哪一步骤开始执行">
                 <el-option
                   v-for="item in list"
@@ -120,10 +123,10 @@
               </el-select>
             </el-form-item>
             <el-form-item label="Spark支持">
-              <el-switch v-model="preprocessAdd.sparkSwitch" />
+              <el-switch v-model="preprocessAdd.sparkSwitch"/>
             </el-form-item>
             <el-form-item v-if="preprocessAdd.sparkSwitch===true" label="Spark Master">
-              <el-input v-model="preprocessAdd.sparkMaster" />
+              <el-input v-model="preprocessAdd.sparkMaster"/>
             </el-form-item>
             <el-form-item label="参数配置">
               <el-button type="success" plain size="small" @click="preprocessParams.show=true">点击配置</el-button>
@@ -140,12 +143,13 @@
 
     <!-- 参数配置对话框 -->
     <el-dialog title="参数配置" :visible.sync="preprocessParams.show" width="700px">
-      <pre-process-params-set :key="preprocessAdd.preprocessSelect" :preprocess-name="preprocessAdd.preprocessSelect[1]" @getPreprocessParams="getPreprocessParams" />
+      <pre-process-params-set :key="preprocessAdd.preprocessSelect" :preprocess-name="preprocessAdd.preprocessSelect[1]"
+                              @getPreprocessParams="getPreprocessParams"/>
     </el-dialog>
 
     <!-- 参数查看对话框 -->
     <el-dialog title="参数查看" :visible.sync="preprocessParamsShow.show" width="450px">
-      <pre-process-params-show :params="preprocessParamsShow.params" />
+      <pre-process-params-show :params="preprocessParamsShow.params"/>
     </el-dialog>
 
     <!-- 数据导出对话框 -->
@@ -153,13 +157,13 @@
       <el-form ref="preprocessDownloadForm" :model="preprocessDownload" label-width="120px">
         <el-form-item label="导出属性" prop="content" :rules="[{ required: true, message: '请选择需要导出的属性', trigger: 'blur' }]">
           <el-select v-model="preprocessDownload.content" placeholder="选择需要导出的属性">
-            <el-option label="vectors" value="vectors" />
-            <el-option label="label_id" value="label_id" />
-            <el-option label="label" value="label" />
-            <el-option label="embedding" value="embedding" />
-            <el-option label="embedding_matrix" value="embedding_matrix" />
-            <el-option label="feature" value="feature" />
-            <el-option label="vocabs" value="vocabs" />
+            <el-option label="vectors" value="vectors"/>
+            <el-option label="label_id" value="label_id"/>
+            <el-option label="label" value="label"/>
+            <el-option label="embedding" value="embedding"/>
+            <el-option label="embedding_matrix" value="embedding_matrix"/>
+            <el-option label="feature" value="feature"/>
+            <el-option label="vocabs" value="vocabs"/>
           </el-select>
         </el-form-item>
         <el-button type="primary" style="margin-left:40%" @click="confirmDownload">确认导出</el-button>
@@ -171,7 +175,8 @@
       <el-row type="flex" justify="center">
         <el-col :span="18" style="text-align:left">
           <el-form ref="featuresConstructionForm" :model="featuresConstruction" label-width="120px">
-            <el-form-item label="选择步骤" prop="preprocessID" :rules="[{ required: true, message: '请选择预处理步骤', trigger: 'blur' }]">
+            <el-form-item label="选择步骤" prop="preprocessID"
+                          :rules="[{ required: true, message: '请选择预处理步骤', trigger: 'blur' }]">
               <el-select v-model="featuresConstruction.preprocessID" placeholder="由哪一步骤生成特征集">
                 <el-option
                   v-for="item in list"
@@ -183,13 +188,13 @@
             </el-form-item>
             <el-form-item label="选择特征集属性">
               <el-checkbox-group v-model="featuresConstruction.columns">
-                <el-checkbox label="label" />
-                <el-checkbox label="label_id" />
-                <el-checkbox label="vectors" />
-                <el-checkbox label="feature" />
-                <el-checkbox label="embedding" />
-                <el-checkbox label="embedding_matrix" />
-                <el-checkbox label="vocabs" />
+                <el-checkbox label="label"/>
+                <el-checkbox label="label_id"/>
+                <el-checkbox label="vectors"/>
+                <el-checkbox label="feature"/>
+                <el-checkbox label="embedding"/>
+                <el-checkbox label="embedding_matrix"/>
+                <el-checkbox label="vocabs"/>
               </el-checkbox-group>
             </el-form-item>
           </el-form>
@@ -207,7 +212,8 @@
       <el-row type="flex" justify="center">
         <el-col :span="18" style="text-align:left">
           <el-form ref="pipelineConstruction" :model="pipelineConstruction" label-width="120px">
-            <el-form-item label="选择步骤" prop="preprocessid" :rules="[{ required: true, message: '请选择预处理步骤', trigger: 'blur' }]">
+            <el-form-item label="选择步骤" prop="preprocessid"
+                          :rules="[{ required: true, message: '请选择预处理步骤', trigger: 'blur' }]">
               <el-select v-model="pipelineConstruction.preprocessid" placeholder="由哪一步骤生成特征集" style="width:200px">
                 <el-option
                   v-for="item in list"
@@ -217,13 +223,14 @@
                 />
               </el-select>
             </el-form-item>
-            <el-form-item label="管道名称" prop="pipelineName" :rules="[{ required: true, message: '请填写管道名称', trigger: 'blur' }]">
-              <el-input v-model="pipelineConstruction.pipelineName" placeholder="请填写管道名称" style="width:200px" />
+            <el-form-item label="管道名称" prop="pipelineName"
+                          :rules="[{ required: true, message: '请填写管道名称', trigger: 'blur' }]">
+              <el-input v-model="pipelineConstruction.pipelineName" placeholder="请填写管道名称" style="width:200px"/>
             </el-form-item>
             <el-form-item label="公开性" prop="publicity">
               <el-radio-group v-model="pipelineConstruction.publicity">
-                <el-radio label="公开" />
-                <el-radio label="不公开" />
+                <el-radio label="公开"/>
+                <el-radio label="不公开"/>
               </el-radio-group>
             </el-form-item>
           </el-form>
@@ -241,10 +248,10 @@
 
 <script>
 
-import { preprocessStatusFetch, preprocessAdd, preprocessDeal } from '@/api/process-manage/preprocess'
-import { operatorsFetch } from '@/api/common/operator'
-import { datasetCopy } from '@/api/common/dataset'
-import { pipelineUpload } from '@/api/data-manage/pipeline'
+import {preprocessStatusFetch, preprocessAdd, preprocessDeal} from '@/api/process-manage/preprocess'
+import {operatorsFetch} from '@/api/common/operator'
+import {datasetCopy} from '@/api/common/dataset'
+import {pipelineUpload} from '@/api/data-manage/pipeline'
 
 import PreProcessParamsSet from './pre-process-params-set'
 import PreProcessParamsShow from './pre-process-params-show'
@@ -253,7 +260,7 @@ import axios from 'axios'
 
 export default {
   name: 'PreProcessManageTable',
-  components: { PreProcessParamsSet, PreProcessParamsShow },
+  components: {PreProcessParamsSet, PreProcessParamsShow},
   filters: {
     statusFilter(status) {
       const statusMap = {
@@ -337,13 +344,22 @@ export default {
       })
     },
     getOperators() {
-      operatorsFetch({ 'type': 'all', 'operatorType': ['预处理算子'], 'operatorName': '', 'username': ['自己'], 'sort': '-id' }).then(response => {
+      operatorsFetch({
+        'type': 'all',
+        'operatorType': ['预处理算子'],
+        'operatorName': '',
+        'username': ['自己'],
+        'sort': '-id'
+      }).then(response => {
         var operators = {}
         operators['value'] = '自定义算子'
         operators['label'] = '自定义算子'
         operators['children'] = []
         for (var i = 0; i < response.data.items.length; i++) {
-          operators['children'].push({ 'value': response.data.items[i].operatorName, 'label': response.data.items[i].operatorName })
+          operators['children'].push({
+            'value': response.data.items[i].operatorName,
+            'label': response.data.items[i].operatorName
+          })
         }
         this.preprocessAdd.preprocessList.pop()
         this.preprocessAdd.preprocessList.push(operators)
@@ -354,7 +370,13 @@ export default {
     handlePreprocessAdd() {
       this.$refs.preprocessAddForm.validate((valid) => {
         if (valid) {
-          preprocessAdd({ 'datasetid': this.listQuery.datasetid, 'preprocessAdd': this.preprocessAdd.preprocessSelect, 'previousProcessID': this.preprocessAdd.previousProcessID, 'sparkSupport': this.preprocessAdd.sparkSwitch, 'preprocessParams': this.preprocessParams.params }).then(response => {
+          preprocessAdd({
+            'datasetid': this.listQuery.datasetid,
+            'preprocessAdd': this.preprocessAdd.preprocessSelect,
+            'previousProcessID': this.preprocessAdd.previousProcessID,
+            'sparkSupport': this.preprocessAdd.sparkSwitch,
+            'preprocessParams': this.preprocessParams.params
+          }).then(response => {
             this.getList()
             this.preprocessAdd.show = false
           })
@@ -366,7 +388,7 @@ export default {
       this.preprocessParams.show = false
     },
     handleDealPreprocess(row, $index) {
-      preprocessDeal({ 'datasetid': this.listQuery.datasetid, 'preprocessIndex': $index }).then(response => {
+      preprocessDeal({'datasetid': this.listQuery.datasetid, 'preprocessIndex': $index}).then(response => {
         this.getList()
         this.$message({
           message: row.preprocessName + '开始执行'
@@ -396,8 +418,14 @@ export default {
         if (valid) {
           axios
             .get(process.env.VUE_APP_BASE_API + '/process-manage/pre-process/datasets/ID/preprocesses/ID/download',
-              { params: { 'datasetid': this.listQuery.datasetid, 'preprocessid': this.preprocessDownload.preprocessid, 'content': this.preprocessDownload.content },
-                headers: { 'Authorization': 'Bearer ' + this.$store.state.user.token }})
+              {
+                params: {
+                  'datasetid': this.listQuery.datasetid,
+                  'preprocessid': this.preprocessDownload.preprocessid,
+                  'content': this.preprocessDownload.content
+                },
+                headers: {'Authorization': 'Bearer ' + this.$store.state.user.token}
+              })
             .then(response => {
               const fileName = response.headers['content-disposition']
               var url = window.URL.createObjectURL(new Blob([response.data]))
@@ -412,7 +440,15 @@ export default {
       })
     },
     handleCopy() {
-      datasetCopy({ 'datasetInitid': this.listQuery.datasetid, 'params': { 'preprocessid': this.featuresConstruction.preprocessID, 'attributes': this.featuresConstruction.columns }, 'datasetInitType': '预处理数据集', 'copyDes': '特征数据集' }).then(response => {
+      datasetCopy({
+        'datasetInitid': this.listQuery.datasetid,
+        'params': {
+          'preprocessid': this.featuresConstruction.preprocessID,
+          'attributes': this.featuresConstruction.columns
+        },
+        'datasetInitType': '预处理数据集',
+        'copyDes': '特征数据集'
+      }).then(response => {
         this.$refs.featuresConstructionForm.validate((valid) => {
           if (valid) {
             this.featuresConstruction.show = false
@@ -429,7 +465,12 @@ export default {
     handlePipelineConstruction() {
       this.$refs.pipelineConstruction.validate((valid) => {
         if (valid) {
-          pipelineUpload({ 'datasetid': this.listQuery.datasetid, 'preprocessid': this.pipelineConstruction.preprocessid, 'pipelineName': this.pipelineConstruction.pipelineName, 'publicity': this.pipelineConstruction.publicity }).then(response => {
+          pipelineUpload({
+            'datasetid': this.listQuery.datasetid,
+            'preprocessid': this.pipelineConstruction.preprocessid,
+            'pipelineName': this.pipelineConstruction.pipelineName,
+            'publicity': this.pipelineConstruction.publicity
+          }).then(response => {
             this.$notify({
               title: '管道生成成功',
               message: '可使用生成的管道处理批处理数据集。',

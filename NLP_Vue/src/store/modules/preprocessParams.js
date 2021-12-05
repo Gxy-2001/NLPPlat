@@ -8,13 +8,14 @@ const state = {
     }, {
       value: '词性标注',
       label: '词性标注'
-    }, {
-      value: '去停用词',
-      label: '去停用词'
-    }, {
-      value: '关键词提取',
-      label: '关键词提取'
-    }]
+    },
+      {
+        value: '去停用词',
+        label: '去停用词'
+      }, {
+        value: '关键词提取',
+        label: '关键词提取'
+      }]
   }, {
     value: '向量模型',
     label: '向量模型',
@@ -27,15 +28,6 @@ const state = {
     }, {
       value: 'Doc2vec',
       label: 'Doc2vec'
-    }, {
-      value: 'GloVe',
-      label: 'GloVe'
-    }, {
-      value: 'ELMo',
-      label: 'ELMo'
-    }, {
-      value: 'BERT',
-      label: 'BERT'
     }]
   }, {
     value: '特征生成',

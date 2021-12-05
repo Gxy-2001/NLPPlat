@@ -28,15 +28,20 @@ def preprocessManage(preprocessType, preprocessName, data, params, taskType, dat
         type = preprocessTypeMap[taskType]
         if preprocessType == '基本预处理':
             if preprocessName == '分词':
-                data = cut(data, params, type, master=-1)
+                data = cut(data, params, type, master=master)
             elif preprocessName == '词性标注':
-                data = postagging(data, params, type, master=-1)
+                data = postagging(data, params, type, master=master)
             elif preprocessName == '去停用词':
-                data = stopwords(data, params, type, master=-1)
+                data = stopwords(data, params, type, master=master)
+            elif preprocessName == '关键词提取':
+                data = base_methods.key_words(data, params, type, master=master)
 
         elif preprocessType == '向量模型':
             if preprocessName == 'Word2vec':
-                data = vector_models.Word2vec(data, params, type)
+                if master == -1:
+                    data = vector_models.Word2vec(data, params, type)
+                else:
+                    data = vector_models.Word2vecSpark(data, params, type)
 
         elif preprocessType == '特征生成':
             if preprocessName == '序列化':

@@ -34,6 +34,26 @@ def Word2vec(data, params, type):
     return data
 
 
+from pyspark.ml.feature import Word2Vec
+from pyspark.sql import SparkSession
+
+
+def Word2vecSpark(data, params, type):
+    spark = SparkSession.builder.appName("word2vec").config("master", "local[*]").enableHiveSupport().getOrCreate()
+    sentences = []
+    for vector in data['vectors']:
+        if 'text1' in type:
+            sentences.append(vector['text1'])
+        if 'text2' in type:
+            sentences.append(vector['text2'])
+    df_document = spark.createDataFrame(sentences, ["text"])
+    word2Vec = Word2Vec(vectorSize=3, minCount=0, inputCol="text", outputCol="result")
+    model = word2Vec.fit(df_document)
+    df_vector = model.transform(df_document)
+    for row in df_vector.collect():
+        text, vector = row
+        print("text: [%s] => \nvector: %s\n" % (", ".join(text), str(vector)))
+
 def Doc2vec(data, params, type):
     sentences = []
     for vector in data['vectors']:

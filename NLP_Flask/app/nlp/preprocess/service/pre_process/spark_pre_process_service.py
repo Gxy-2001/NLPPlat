@@ -1,28 +1,18 @@
 # -*- coding: utf-8 -*-
-"""
-@Time ： 2020/10/15 15:53
-@Auth ： sora
-@File ：common_pre_process_service.py
-@IDE ：PyCharm
-@Motto：ABC(Always Be Coding)
-
-"""
-
-
 from app.nlp.preprocess.service.pre_process_service import PreProcessService
 from pyspark import SparkConf, SparkContext
 
-class SparkPreProcessService(PreProcessService):
 
-    def cut(self,data, type,master='local[4]'):
+class SparkPreProcessService(PreProcessService):
+    def cut(self, data, type, master='local[4]'):
         sparkConf = SparkConf().setAppName('cut').setMaster(master)
         sc = SparkContext(conf=sparkConf)
         rdd = sc.parallelize(data['vectors'])
-        data['vectors'] = rdd.map(lambda x:self.cut_item(data_item=x,type=type)).collect()
+        data['vectors'] = rdd.map(lambda x: self.cut_item(data_item=x, type=type)).collect()
         sc.stop()
         return data
 
-    def postagging(self,data, type,master='local[4]'):
+    def postagging(self, data, type, master='local[4]'):
         sparkConf = SparkConf().setAppName('postagging').setMaster(master)
         sc = SparkContext(conf=sparkConf)
         rdd = sc.parallelize(data['vectors'])
@@ -30,11 +20,10 @@ class SparkPreProcessService(PreProcessService):
         sc.stop()
         return data
 
-    def stopwords(self,data, params, type,master='local[4]'):
+    def stopwords(self, data, params, type, master='local[4]'):
         sparkConf = SparkConf().setAppName('stopwords').setMaster(master)
         sc = SparkContext(conf=sparkConf)
         rdd = sc.parallelize(data['vectors'])
-        data['vectors'] = rdd.map(lambda x: self.stopwords_item(data_item=x, params=params,type=type)).collect()
+        data['vectors'] = rdd.map(lambda x: self.stopwords_item(data_item=x, params=params, type=type)).collect()
         sc.stop()
         return data
-

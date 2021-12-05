@@ -180,8 +180,13 @@ def preprocessManage(dataset, preprocessIndex):
 
     # 控制函数调用
     previousData = getDataFromPreprocessDataset(dataset, previousProcessIndex)
+    master = -1
+    print("sparkSupport:", sparkSupport)
+    if sparkSupport:
+        print("使用spark")
+        master = 'local[*]'
     curData = preprocess.preprocessManage(preprocessType, preprocessName, previousData, params, taskType,
-                                          datasetID=dataset.id, master=-1, pipeline=-1)
+                                          datasetID=dataset.id, master=master, pipeline=-1)
     setDataToPreprocessDataset(dataset, preprocessIndex, preprocessName, preprocessType, curData)
 
     # 数据库状态更改
