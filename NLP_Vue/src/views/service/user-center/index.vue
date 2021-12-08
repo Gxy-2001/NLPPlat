@@ -11,14 +11,8 @@
               <el-tab-pane label="个人信息" name="个人信息">
                 <account />
               </el-tab-pane>
-              <el-tab-pane label="我的钱包" name="我的钱包">
-                <wallet />
-              </el-tab-pane>
-              <el-tab-pane label="操作记录" name="操作记录">
+              <el-tab-pane label="任务记录" name="任务记录">
                 <timeline />
-              </el-tab-pane>
-              <el-tab-pane label="个人博客" name="个人博客">
-                <activity />
               </el-tab-pane>
             </el-tabs>
           </el-card>

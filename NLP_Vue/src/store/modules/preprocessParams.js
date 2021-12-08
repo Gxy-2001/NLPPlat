@@ -47,6 +47,16 @@ const state = {
       label: 'LDA'
     }]
   }, {
+    value: '特征缩放',
+    label: '特征缩放',
+    children: [{
+      value: 'MaxMin标准化',
+      label: 'MaxMin标准化'
+    }, {
+      value: 'MaxAbsScaler标准化',
+      label: 'MaxAbsScaler标准化'
+    }]
+  }, {
     value: '特征选择',
     label: '特征选择',
     children: [{
@@ -59,17 +69,11 @@ const state = {
       value: '卡方检验',
       label: '卡方检验'
     }, {
-      value: '互信息法',
-      label: '互信息法'
+      value: '多元高斯',
+      label: '多元高斯'
     }, {
-      value: '递归特征消除',
-      label: '递归特征消除'
-    }, {
-      value: '惩罚项',
-      label: '惩罚项'
-    }, {
-      value: '树模型',
-      label: '树模型'
+      value: '汇总信息',
+      label: '汇总信息'
     }]
   }, {
     value: '标签映射',

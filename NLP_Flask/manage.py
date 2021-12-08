@@ -5,7 +5,7 @@ celery = create_celery(app)
 register_blueprint(app)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
     '''
     if app.config['RUN_MODE']=='development':
         app.run(debug = False)

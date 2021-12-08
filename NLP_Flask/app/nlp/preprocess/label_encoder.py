@@ -27,7 +27,7 @@ def single_label_encoder(data, params, type):
         i = 0
         for label_id in label_ids:
             f.write(label_id + ' ' + str(i) + '\n')
-            i=i+1
+            i = i + 1
     data['label_id'] = txtURL
     return data
 
@@ -63,3 +63,4 @@ def BIO_label_encoder(data, params, type):
                 f.write('\n')
     data['label'] = txtURL
     return data
+

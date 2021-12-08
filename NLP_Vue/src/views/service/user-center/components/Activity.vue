@@ -3,9 +3,9 @@
     <div class="post">
       <div class="user-block">
         <img class="img-circle"
-             :src="'https://wpimg.wallstcn.com/57ed425a-c71e-4201-9428-68760c0537c4.jpg'+avatarPrefix">
+             :src="'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'+avatarPrefix">
         <span class="username text-muted">Iron Man</span>
-        <span class="description">Shared publicly - 7:30 PM today</span>
+        <span class="description">发布</span>
       </div>
       <p>
         Lorem ipsum represents a long-held tradition for designers,

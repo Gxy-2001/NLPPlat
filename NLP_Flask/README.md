@@ -1,35 +1,19 @@
-English | [简体中文](./README.zh-CN.md)
-
-## Content introduction
+## NLP Plat
 
 ```
-
-- app
-  - libs  外部库
-  - process_manage_api  过程管理API
-  - data_manage_api  数据管理API
-  - service 服务类API
-  - utils  工具类
-  - spark  spark支持类
-  - nlp  nlp模型类
-
+app
+  admin_api  用户管理
+  common_api  公用
+  data_manage_api  数据管理
+  dataAPI 辅助数据管理
+  expand_api  模型部署
+  models  数据库模型
+  nlp  nlp模型类
+  	batch_process 批处理
+  	data_cleaning 数据清洗
+  	model_train 模型训练
+  	preprocesss 预处理
+  process_manage_api 过程管理
+  service_api 用户管理
+  utils 工具包
 ```
-
-```
-## Getting started
-
-```bash
-# clone the project
-git clone https://github.com/kevinchannn/NLP_Flask.git
-
-# enter the project directory
-cd NLP_Flask
-
-# develop
-python manage.py
-```
-
-For postman http://localhost:5000
-
-Copyright (c) 2020-present NJU_CK
-

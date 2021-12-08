@@ -3,13 +3,11 @@
     <el-form ref="postForm" :model="postForm" :rules="rules" class="form-container">
 
       <sticky :z-index="10" :class-name="'sub-navbar '+postForm.status">
-        <CommentDropdown v-model="postForm.comment_disabled"/>
+
         <el-button v-loading="loading" style="margin-left: 10px;" type="success" @click="submitForm">
           发布文章
         </el-button>
-        <el-button v-loading="loading" type="warning" @click="draftForm">
-          保存草稿
-        </el-button>
+
       </sticky>
 
       <div class="createPost-main-container">
@@ -41,26 +39,14 @@
                   </el-form-item>
                 </el-col>
 
-                <el-col :span="6">
-                  <el-form-item label-width="90px" label="重要性:" class="postInfo-container-item">
-                    <el-rate
-                      v-model="postForm.importance"
-                      :max="3"
-                      :colors="['#99A9BF', '#F7BA2A', '#FF9900']"
-                      :low-threshold="1"
-                      :high-threshold="3"
-                      style="display:inline-block"
-                    />
-                  </el-form-item>
-                </el-col>
               </el-row>
             </div>
           </el-col>
         </el-row>
 
-        <el-form-item style="margin-bottom: 40px;" label-width="70px" label="摘要:">
+        <el-form-item style="margin-bottom: 40px;" label-width="70px" label="题目:">
           <el-input v-model="postForm.content_short" :rows="1" type="textarea" class="article-textarea" autosize
-                    placeholder="请输入摘要"/>
+                    placeholder="请输入题目"/>
           <span v-show="contentShortLength" class="word-counter">{{ contentShortLength }}words</span>
         </el-form-item>
 

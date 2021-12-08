@@ -21,6 +21,7 @@ class User(db.Document):
     maxCapacityTime = db.DateTimeField()
     expireTime = db.IntField()
 
+
 # 钱包类
 class Wallet(db.Document):
     username = db.StringField(required=True)
@@ -32,3 +33,8 @@ class Order(db.Document):
     username = db.StringField(required=True)
     type = db.StringField()
     salesperson = db.StringField()
+
+
+class Article(db.Document):
+    username = db.StringField(required=True)
+    money = db.StringField()

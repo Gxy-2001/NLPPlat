@@ -2,6 +2,7 @@ from . import base_methods
 from . import vector_models
 from . import features_construction
 from . import label_encoder
+from . import statistics
 
 from app.models.operator import *
 from app.utils.codehub_utils import *
@@ -42,6 +43,31 @@ def preprocessManage(preprocessType, preprocessName, data, params, taskType, dat
                     data = vector_models.Word2vec(data, params, type)
                 else:
                     data = vector_models.Word2vecSpark(data, params, type)
+            elif preprocessName == 'TFIDF':
+                if master == -1:
+                    data = vector_models.myTFIDF(data, params, type)
+                else:
+                    data = vector_models.myTFIDFSpark(data, params, type)
+
+        elif preprocessType == '特征降维':
+            if preprocessName == 'PCA':
+                if master == -1:
+                    data = vector_models.PCASK(data, params, type)
+                else:
+                    data = vector_models.PCASpark(data, params, type)
+            elif preprocessName == 'LDA':
+                if master == -1:
+                    data = vector_models.LDASK(data, params, type)
+                else:
+                    data = vector_models.LDASpark(data, params, type)
+
+        elif preprocessType == '特征缩放':
+            if preprocessName=='MaxMin标准化':
+                if master != -1:
+                    data = vector_models.MinMax(data, params, type)
+            if preprocessName=='MaxAbsScaler标准化':
+                if master != -1:
+                    data = vector_models.MaxAbs(data, params, type)
 
         elif preprocessType == '特征生成':
             if preprocessName == '序列化':
@@ -52,6 +78,18 @@ def preprocessManage(preprocessType, preprocessName, data, params, taskType, dat
                 data = label_encoder.single_label_encoder(data, params, type)
             elif preprocessName == '序列BIO':
                 data = label_encoder.BIO_label_encoder(data, params, type)
+
+        elif preprocessType == '特征选择':
+            if preprocessName == '方差选择':
+                data = statistics.variance(data, params, type)
+            elif preprocessName == '相关系数':
+                data = statistics.correlationCoefficient(data, params, type)
+            elif preprocessName == '卡方检验':
+                data = statistics.ChiSquareTest(data, params, type)
+            elif preprocessName == '多元高斯':
+                data = statistics.MultivariateGauss(data, params, type)
+            elif preprocessName == '多元高斯':
+                data = statistics.PearsonCoefficient(data, params, type)
 
         elif preprocessType == '自定义算子':
             code = Operator.objects(operatorName=preprocessName).first().code

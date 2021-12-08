@@ -1,60 +1,142 @@
 <template>
-  <div class="app-container">
-    <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
-      <el-table-column align="center" label="ID" width="80">
-        <template slot-scope="scope">
-          <span>{{ scope.row.id }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column width="180px" align="center" label="Date">
-        <template slot-scope="scope">
-          <span>{{ scope.row.timestamp | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column width="120px" align="center" label="Author">
-        <template slot-scope="scope">
-          <span>{{ scope.row.author }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column width="100px" label="Importance">
-        <template slot-scope="scope">
-          <svg-icon v-for="n in +scope.row.importance" :key="n" icon-class="star" class="meta-item__icon" />
-        </template>
-      </el-table-column>
-
-      <el-table-column class-name="status-col" label="Status" width="110">
-        <template slot-scope="{row}">
-          <el-tag :type="row.status | statusFilter">
-            {{ row.status }}
-          </el-tag>
-        </template>
-      </el-table-column>
-
-      <el-table-column min-width="300px" label="Title">
-        <template slot-scope="{row}">
-          <router-link :to="'/example/edit/'+row.id" class="link-type">
-            <span>{{ row.title }}</span>
-          </router-link>
-        </template>
-      </el-table-column>
-
-      <el-table-column align="center" label="Actions" width="120">
-        <template slot-scope="scope">
-          <router-link :to="'/example/edit/'+scope.row.id">
-            <el-button type="primary" size="small" icon="el-icon-edit">
-              Edit
-            </el-button>
-          </router-link>
-        </template>
-      </el-table-column>
-    </el-table>
-
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+  <div class="user-activity">
+    <div class="post">
+      <div class="user-block">
+        <img class="img-circle"
+             :src="'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'">
+        <span class="username text-muted">admin</span>
+        <span class="description">标题</span>
+      </div>
+      <p>
+        一篇文章
+      </p>
+      <ul class="list-inline">
+        <li>
+          <span class="link-black text-sm">
+            <i class="el-icon-share"/>
+            Share
+          </span>
+        </li>
+        <li>
+          <span class="link-black text-sm">
+            <svg-icon icon-class="like"/>
+            Like
+          </span>
+        </li>
+      </ul>
+    </div>
+    <div class="post">
+      <div class="user-block">
+        <img class="img-circle"
+             :src="'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'">
+        <span class="username text-muted">admin</span>
+        <span class="description">标题</span>
+      </div>
+      <p>
+        一篇文章
+      </p>
+      <ul class="list-inline">
+        <li>
+          <span class="link-black text-sm">
+            <i class="el-icon-share"/>
+            Share
+          </span>
+        </li>
+        <li>
+          <span class="link-black text-sm">
+            <svg-icon icon-class="like"/>
+            Like
+          </span>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.user-activity {
+  .user-block {
+
+    .username,
+    .description {
+      display: block;
+      margin-left: 50px;
+      padding: 2px 0;
+    }
+
+    .username {
+      font-size: 16px;
+      color: #000;
+    }
+
+    :after {
+      clear: both;
+    }
+
+    .img-circle {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      float: left;
+    }
+
+    span {
+      font-weight: 500;
+      font-size: 12px;
+    }
+  }
+
+  .post {
+    font-size: 14px;
+    border-bottom: 1px solid #d2d6de;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    color: #666;
+
+    .image {
+      width: 100%;
+      height: 100%;
+
+    }
+
+    .user-images {
+      padding-top: 20px;
+    }
+  }
+
+  .list-inline {
+    padding-left: 0;
+    margin-left: -5px;
+    list-style: none;
+
+    li {
+      display: inline-block;
+      padding-right: 5px;
+      padding-left: 5px;
+      font-size: 13px;
+    }
+
+    .link-black {
+
+      &:hover,
+      &:focus {
+        color: #999;
+      }
+    }
+  }
+
+}
+
+.box-center {
+  margin: 0 auto;
+  display: table;
+}
+
+.text-muted {
+  color: #777;
+}
+</style>
+
 
 <script>
 import { fetchList } from '@/api/community/article'
@@ -100,13 +182,3 @@ export default {
 }
 </script>
 
-<style scoped>
-.edit-input {
-  padding-right: 100px;
-}
-.cancel-btn {
-  position: absolute;
-  right: 15px;
-  top: 10px;
-}
-</style>

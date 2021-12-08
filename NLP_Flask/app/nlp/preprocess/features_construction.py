@@ -34,7 +34,6 @@ def padSequence(data, params, type):
     for i in range(len(vocab_list)):
         word = vocab_list[i]
         word_index[word] = i + 1
-        # word_vector[word] = model.wv[word]
         embedding_matrix[i + 1] = model.wv[word]
 
     # 序列化
